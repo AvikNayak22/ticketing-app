@@ -3,7 +3,8 @@
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
-const EditTicketForm = () => {
+const TicketForm = ({ ticket }) => {
+  const EDITMODE = ticket._id === "new" ? false : true;
   const router = useRouter();
 
   const startingTicketData = {
@@ -14,6 +15,15 @@ const EditTicketForm = () => {
     progress: 0,
     status: "not started",
   };
+
+  if (EDITMODE) {
+    startingTicketData["title"] = ticket.title;
+    startingTicketData["description"] = ticket.description;
+    startingTicketData["priority"] = ticket.priority;
+    startingTicketData["progress"] = ticket.progress;
+    startingTicketData["status"] = ticket.status;
+    startingTicketData["category"] = ticket.category;
+  }
 
   const [formData, setFormData] = useState(startingTicketData);
 
@@ -27,14 +37,30 @@ const EditTicketForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch(`/api/Tickets/`, {
-      method: "POST",
-      body: JSON.stringify({ formData }),
-      "Content-Type": "application/json",
-    });
+    if (EDITMODE) {
+      const res = await fetch(`/api/Tickets/${ticket._id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ formData }),
+      });
 
-    if (!res.ok) {
-      throw new Error("Failed to create Ticket.");
+      if (!res.ok) {
+        throw new Error("Failed to update Ticket.");
+      }
+    } else {
+      const res = await fetch(`/api/Tickets`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ formData }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to create Ticket.");
+      }
     }
 
     router.push("/");
@@ -48,7 +74,7 @@ const EditTicketForm = () => {
         method="post"
         onSubmit={handleSubmit}
       >
-        <h3>Create your ticket</h3>
+        <h3>{EDITMODE ? "Update your ticket" : "Create your ticket"}</h3>
         <label>Title</label>
         <input
           id="title"
@@ -143,10 +169,14 @@ const EditTicketForm = () => {
           <option value="started">Started</option>
           <option value="done">Done</option>
         </select>
-        <input type="submit" className="btn" value="Create Ticket" />
+        <input
+          type="submit"
+          className="btn"
+          value={EDITMODE ? "Update your ticket" : "Create your ticket"}
+        />
       </form>
     </div>
   );
 };
 
-export default EditTicketForm;
+export default TicketForm;
