@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Ticketing App
 
-## Getting Started
+A full-stack ticket management application built with Next.js, MongoDB, and a variety of frontend technologies. This app allows users to create, update, and delete tickets, track their progress, and manage ticket priorities and statuses.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Create Tickets:** Add new tickets with title, description, category, priority, progress, and status.
+- **Update Tickets:** Edit existing tickets to update details and track changes.
+- **Delete Tickets:** Remove tickets from the system.
+- **Track Progress:** Visualize the progress of each ticket with a progress bar.
+- **Display Priorities:** Show ticket priority using color-coded icons.
+- **Status Indicators:** Display ticket status with different color-coded tags.
+- **Responsive Design:** Adaptable UI to different screen sizes for better user experience.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Frontend:** Next.js, React, Tailwind CSS, FontAwesome
+- **Backend:** Next.js API routes
+- **Database:** MongoDB with Mongoose
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Installation
 
-## Learn More
+1. **Clone the repository:**
+   
+   ```
+    git clone https://github.com/AvikNayak22/ticketing-app.git
+   ```
+2. **Navigate to the project directory:**
+   
+   ```
+   cd ticketing-app
+   ```
+3. **Install dependencies:**
 
-To learn more about Next.js, take a look at the following resources:
+   ```
+   npm install
+   ```
+4. **Create a `.env` file in the root directory and add your MongoDB URI:**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```
+   MONGO_URI=your_mongodb_connection_string
+   ```
+5. **Run the development server:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```
+   npm run dev
+   ```
+   - The app will be available at `http://localhost:3000`.
 
-## Deploy on Vercel
+## Usage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Create a Ticket:** Navigate to the ticket creation page and fill out the form to add a new ticket.
+2. **View Tickets:** Tickets are listed on the dashboard. Click on a ticket to view its details.
+3. **Update a Ticket:** Edit the details of an existing ticket by accessing the edit form.
+4. **Delete a Ticket:** Remove a ticket by clicking the delete button on the ticket card.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## API Endpoints
+
+- **GET /api/Tickets:** Retrieve a list of all tickets.
+- **POST /api/Tickets:** Create a new ticket.
+- **GET /api/Tickets/[id]:** Retrieve a specific ticket by ID.
+- **PUT /api/Tickets/[id]:** Update a specific ticket by ID.
+- **DELETE /api/Tickets/[id]:** Delete a specific ticket by ID.
+
+## Contributor
+- **@AvikNayak22** 
